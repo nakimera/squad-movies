@@ -27,7 +27,9 @@ export default class App extends React.Component {
 
 
 const ContentWrapper = styled.main`
-  padding-left: 280px;
+  @media screen and (min-width: 768px){
+    padding-left: 280px;
+  }
 `
 
 const PageContainer = styled.main`

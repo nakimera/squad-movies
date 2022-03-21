@@ -80,7 +80,11 @@ const MovieFilters = styled.div`
 `
 
 const MobilePageTitle = styled.h1`
-  display: none;
+  margin: 0 0 0 40px;
+  
+  @media screen and (min-width: 768px){
+    display: none;
+  }
 `
 
 const TotalCount = styled.strong`
