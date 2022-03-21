@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from "react";
 import styled from 'styled-components';
 
 import * as colors from "../../colors";
@@ -7,62 +7,62 @@ import * as devices from "../../devices";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
+import { fetchMovies } from "../../fetcher";
 
-export default class Discover extends React.Component {
-  constructor (props) {
-    super(props);
+export default function Discover(){
+  const [results, setResults] = useState({});
+  const [totalCount, setTotalCount] = useState(0);
+  const [keyword, setKeyword] = useState('');
+  const [year, setYear] = useState(0);
+  const [genreOptions, setGenreOptions] = useState([]);
+  const [ratingOptions, setRatingOptions] = useState([
+    { id: 7.5, name: 7.5 },
+    { id: 8, name: 8 },
+    { id: 8.5, name: 8.5 },
+    { id: 9, name: 9 },
+    { id: 9.5, name: 9.5 },
+    { id: 10, name: 10 }
+  ]);
+  const [languageOptions, setLanguageOptions] = useState([
+    { id: 'GR', name: 'Greek' },
+    { id: 'EN', name: 'English' },
+    { id: 'RU', name: 'Russian' },
+    { id: 'PO', name: 'Polish' }
+  ]);
 
-    this.state = {
-      keyword: '',
-      year: 0,
-      results: [],
-      totalCount: 0,
-      genreOptions: [],
-      ratingOptions: [
-        { id: 7.5, name: 7.5 },
-        { id: 8, name: 8 },
-        { id: 8.5, name: 8.5 },
-        { id: 9, name: 9 },
-        { id: 9.5, name: 9.5 },
-        { id: 10, name: 10 }
-      ],
-      languageOptions: [
-        { id: 'GR', name: 'Greek' },
-        { id: 'EN', name: 'English' },
-        { id: 'RU', name: 'Russian' },
-        { id: 'PO', name: 'Polish' }
-      ]
-    };
-  }
+  useEffect(() => {
+    async function fetchAllMovies(){
+      let data = await fetchMovies();
+      setResults(data); 
+      setTotalCount(data.total_results);
+    }
+    fetchAllMovies();
+  }, [])
 
   // TODO: Preload and set the popular movies and movie genres when page loads
 
   // TODO: Update search results based on the keyword and year inputs
 
-  render () {
-    const { genreOptions, languageOptions, ratingOptions, totalCount, results } = this.state;
-
-    return (
-      <DiscoverWrapper>
-        <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-        <TotalCount>{totalCount} results</TotalCount>
-        <MovieFilters>
-          <SearchFilters 
-            genres={genreOptions} 
-            ratings={ratingOptions}  
-            languages={languageOptions}
-            searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
-          />
-        </MovieFilters>
-        <MovieResults>
-          <MovieList 
-            movies={results || []}
-            genres={genreOptions || []}
-          />
-        </MovieResults>
-      </DiscoverWrapper>
-    )
-  }
+  return(
+    <DiscoverWrapper>
+      <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
+      <TotalCount>{totalCount} results</TotalCount>
+      <MovieFilters>
+        <SearchFilters 
+          genres={genreOptions} 
+          ratings={ratingOptions}  
+          languages={languageOptions}
+          searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
+        />
+      </MovieFilters>
+      <MovieResults>
+        <MovieList
+          movies={results.results || []}
+          genres={genreOptions || []}
+        />
+      </MovieResults>
+    </DiscoverWrapper>
+  )
 }
 
 const DiscoverWrapper = styled.main`
