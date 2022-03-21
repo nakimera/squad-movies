@@ -5,6 +5,7 @@ import menuIcon from "../../images/menu.svg";
 import closeIcon from "../../images/close.svg";
 
 import * as colors from "../../colors";
+import * as devices from "../../devices";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
@@ -19,7 +20,7 @@ export default function SideNavBar () {
   return (
     <div ref={node}>
       <ToggleIcon isOpen={isOpen} src={isOpen ? closeIcon : menuIcon} onClick={() => setIsOpen(!isOpen)}></ToggleIcon>
-      <SideNavBarCont className={isOpen ? 'visible' : ''}>
+      <SideNavBarCont isOpen={isOpen} className={isOpen ? 'visible' : ''}>
         {/* TODO: Implement a hamburger icon that controls the open state of the sidebar. This control should only be visible on mobile devices via CSS media queries */}
         {/* The sidebar should slide in from left */}
         <SideNavHeader>
@@ -48,14 +49,13 @@ const SideNavBarCont = styled.div`
   height: 100%;
   background-color: ${colors.sideNavBar};
   color: white;
-  display: none;
 
   &.visible{
     display: unset;
   }
 
-  @media screen and (min-width: 768px){
-    display: unset;
+  @media screen and (max-width: ${devices.mobile}){
+    display: none;
   }
 `
 
@@ -121,8 +121,9 @@ const ToggleIcon = styled.img`
   top: ${props => props.isOpen ? '5px' : '40px'};
   left: ${props => props.isOpen ? '5px' : '30px'};
   padding: 0;
+  display: none;
 
-  @media screen and (min-width: 768px){
-    display: none;
+  @media screen and (max-width: ${devices.mobile}){
+    display: unset;
   }
 `

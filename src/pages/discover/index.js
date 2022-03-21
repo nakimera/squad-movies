@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import * as colors from "../../colors";
 import * as fetcher from "../../fetcher";
+import * as devices from "../../devices";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
@@ -80,10 +81,11 @@ const MovieFilters = styled.div`
 `
 
 const MobilePageTitle = styled.h1`
-  margin: 0 0 0 40px;
-  
-  @media screen and (min-width: 768px){
-    display: none;
+  display: none;
+
+  @media screen and (max-width: ${devices.mobile}){
+    display: unset;
+    margin: 0 0 0 40px;
   }
 `
 

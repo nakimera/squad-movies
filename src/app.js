@@ -7,6 +7,7 @@ import SideNavBar from "./components/sidenavbar";
 import Discover from "./pages/discover";
 
 import './css/app.scss'; 
+import * as devices from "./devices";
 
 export default class App extends React.Component {
   render () {
@@ -27,8 +28,10 @@ export default class App extends React.Component {
 
 
 const ContentWrapper = styled.main`
-  @media screen and (min-width: 768px){
-    padding-left: 280px;
+  padding-left: 280px;
+
+  @media screen and (max-width: ${devices.mobile}){
+    padding-left: 0;
   }
 `
 
