@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { NavLink as Link } from "react-router-dom";
 import menuIcon from "../../images/menu.svg";
 import closeIcon from "../../images/close.svg";
@@ -42,6 +42,15 @@ export default function SideNavBar () {
   );
 }
 
+const slideIn =  keyframes`
+  0% {
+      transform: translate(-280px, 0);    
+  }
+  100% {
+      transform: translate(0, 0);
+  }
+`
+
 const SideNavBarCont = styled.div`
   position: fixed;
   z-index: 9;
@@ -50,12 +59,13 @@ const SideNavBarCont = styled.div`
   background-color: ${colors.sideNavBar};
   color: white;
 
-  &.visible{
-    display: unset;
-  }
-
   @media screen and (max-width: ${devices.mobile}){
     display: none;
+
+    &.visible{
+      display: unset;
+      animation: ${slideIn} .3s linear;
+    }
   }
 `
 
