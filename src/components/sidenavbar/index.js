@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { css } from 'styled-components';
 import { NavLink as Link } from "react-router-dom";
 import menuIcon from "../../images/menu.svg";
@@ -8,12 +8,16 @@ import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 
+import { useOnClickOutsideMenu } from "./utils";
+
 export default function SideNavBar () {
   const [isOpen, setIsOpen] = useState(false);
   /* TODO: Write the necessary functions to open and close the sidebar */
+  const node = useRef(); 
+  useOnClickOutsideMenu(node, () => setIsOpen(false));
 
   return (
-    <>
+    <div ref={node}>
       <ToggleIcon isOpen={isOpen} src={isOpen ? closeIcon : menuIcon} onClick={() => setIsOpen(!isOpen)}></ToggleIcon>
       <SideNavBarCont className={isOpen ? 'visible' : ''}>
         {/* TODO: Implement a hamburger icon that controls the open state of the sidebar. This control should only be visible on mobile devices via CSS media queries */}
@@ -33,7 +37,7 @@ export default function SideNavBar () {
         <NavLink to="/saved/movies">Movies</NavLink>
         <NavLink to="/saved/tv-shows">Tv Shows</NavLink>
       </SideNavBarCont>
-    </>
+    </div>
   );
 }
 
