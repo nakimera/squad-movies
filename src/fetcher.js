@@ -18,3 +18,17 @@ export function fetchMovies() {
         return error;
     });
 }
+
+// export function fetchGenres(){
+//     return axios.get(`/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`)
+//     .then(res => {
+//         return res.data;
+//     })
+//     .catch(function (error) {
+//         const statusCode = error.response.status;
+//         if(statusCode !== 200){
+//             alert('Ooops! You do not seem to be authourized to view movies on this app. Double check your API KEY or consult owner');
+//         }
+//         return error;
+//     });
+// }

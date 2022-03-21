@@ -128,7 +128,7 @@ const NavLink = styled(Link)`
 const ToggleIcon = styled.img`
   position: fixed;
   z-index: 10;
-  top: ${props => props.isOpen ? '5px' : '40px'};
+  top: ${props => props.isOpen ? '5px' : '32px'};
   left: ${props => props.isOpen ? '5px' : '30px'};
   padding: 0;
   display: none;
