@@ -17,12 +17,14 @@ export default function SearchFilters({ genres, ratings, languages, onSearch }) 
           type="text"
           icon={{ src: SearchIcon, alt: 'Magnifying glass' }} 
           placeholder="Search for movies"
+          onChange={onSearch}
         />
         <SearchBar
           id="year_search_input" 
           type="number"
           icon={{ src: YearIcon, alt: 'Calendar icon' }} 
           placeholder="Year of release"
+          onChange={onSearch}
         />
       </SearchFiltersCont>
       <SearchFiltersCont>

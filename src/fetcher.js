@@ -13,7 +13,7 @@ function errorHandler(error) {
     return error;
 }
 
-export function fetchMovies() {
+export function fetchMovies(){
     return axios.get(`/discover/movie?api_key=${process.env.REACT_APP_API_KEY}`)
     .then(res => {
         return res.data;
@@ -25,6 +25,15 @@ export function fetchGenres(){
     return axios.get(`/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`)
     .then(res => {
         return res.data.genres;
+    })
+    .catch(error => {return  errorHandler(error)});
+}
+
+export function searchMovies({type, val}){
+    return axios.get(`${type === 'text' ? `/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${val}` : 
+        `/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&primary_release_year=${val}`}`)
+    .then(res => {
+        return res.data;
     })
     .catch(error => {return  errorHandler(error)});
 }
