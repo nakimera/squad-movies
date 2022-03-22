@@ -26,8 +26,11 @@ export default function SearchFilters({ genres, ratings, languages, onSearch }) 
         />
       </SearchFiltersCont>
       <SearchFiltersCont>
-        <CategoryTitle>Movies</CategoryTitle>
+        <CategoryTitle>Movie</CategoryTitle>
         {/* TODO: Complete the "AccordionFilter" component and re-use it for all filter categories */}
+        <ExpandableFilter category='genre(s)' options={genres} />
+        <ExpandableFilter category='min. vote' options={ratings} />
+        <ExpandableFilter category='language' options={languages} />
       </SearchFiltersCont>
     </FiltersWrapper>
   );

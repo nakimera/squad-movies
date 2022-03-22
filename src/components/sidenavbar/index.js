@@ -19,7 +19,11 @@ export default function SideNavBar () {
 
   return (
     <div ref={node}>
-      <ToggleIcon isOpen={isOpen} src={isOpen ? closeIcon : menuIcon} onClick={() => setIsOpen(!isOpen)}></ToggleIcon>
+      <ToggleIcon 
+        isOpen={isOpen} 
+        src={isOpen ? closeIcon : menuIcon} 
+        onClick={() => setIsOpen(!isOpen)}
+      />
       <SideNavBarCont isOpen={isOpen} className={isOpen ? 'visible' : ''}>
         {/* TODO: Implement a hamburger icon that controls the open state of the sidebar. This control should only be visible on mobile devices via CSS media queries */}
         {/* The sidebar should slide in from left */}
@@ -33,10 +37,10 @@ export default function SideNavBar () {
         </SideNavMainLink>
         <SideNavSectionTitle><HeaderText>Watched</HeaderText></SideNavSectionTitle>
         <NavLink to="/watched/movies">Movies</NavLink>
-        <NavLink to="/watched/tv-shows">Tv Shows</NavLink>
+        <NavLink to="/watched/tv-shows">TV Shows</NavLink>
         <SideNavSectionTitle><HeaderText>Saved</HeaderText></SideNavSectionTitle>
         <NavLink to="/saved/movies">Movies</NavLink>
-        <NavLink to="/saved/tv-shows">Tv Shows</NavLink>
+        <NavLink to="/saved/tv-shows">TV Shows</NavLink>
       </SideNavBarCont>
     </div>
   );
