@@ -57,13 +57,15 @@ export default function Discover(){
     const val = e.target.value;
     const type = e.target.type;
 
-    async function fetchSearchResults(){
-      let data = await searchMovies({type, val});
-      setResults(data); 
-      setTotalCount(data.total_results);
+    if(val !== ''){
+      async function fetchSearchResults(){
+        let data = await searchMovies({type, val});
+          setResults(data); 
+          setTotalCount(data.total_results);
+      }
+      
+      fetchSearchResults();
     }
-
-    fetchSearchResults();
   }
 
   return(
