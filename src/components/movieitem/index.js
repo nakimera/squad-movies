@@ -7,14 +7,18 @@ import * as devices from "../../devices";
 export default function MovieItem ({ movie, genres }) {
   const posterImageUrl = `${process.env.REACT_APP_BASE_POSTER_IMAGE_URL}/${movie.poster_path}`;
 
+  let ids = movie.genre_ids;
+  let movieGenres = genres.filter(item => ids.includes(item.id))
+
   return (
     // TODO: Complete the MovieItem component
     <MovieItemWrapper>
       <Image src={posterImageUrl} />
       <Container>
         <Title>{movie.title}</Title>
-        <Genre>Genre</Genre>
-        {/* {genresList.map((genre, index) => <Genre key={index}>{genre}</Genre>)} */}
+        <GenresCon>
+          {movieGenres.map((result, index) => <Genre key={index}>{result.name}</Genre>)}
+        </GenresCon>
         <Overview>{movie.overview}</Overview>
         <Date>{movie.release_date}</Date>
         <Rating>{movie.vote_average}</Rating>
@@ -61,11 +65,26 @@ const Image = styled.img`
   }
 `
 
+const GenresCon = styled.div`
+  p{
+    border-right: solid 1px  ${colors.primaryColor};
+  }
+
+  & p:last-child{
+    border-right: none;
+  }
+
+  & p:first-child{
+    padding-left: 0; 
+  }
+`
+
 const Genre = styled.p`
   color: ${colors.primaryColor};
   text-transform: capitalize;
   display: inline-block;
   margin: 0;
+  padding: 0 5px;
   font-size: .8em;
 `
 
