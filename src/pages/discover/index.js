@@ -7,7 +7,7 @@ import * as devices from "../../devices";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
-import { fetchMovies, fetchGenres } from "../../fetcher";
+import { fetchMovies, fetchGenres, searchMovies } from "../../fetcher";
 
 export default function Discover(){
   const [results, setResults] = useState({});
@@ -53,6 +53,17 @@ export default function Discover(){
 
   // TODO: Update search results based on the keyword and year inputs
 
+  const onSearch = (keyword) => {
+    // setKeyword(keyword);
+    async function fetchSearchResults(){
+      let data = await searchMovies(keyword);
+      setResults(data); 
+      setTotalCount(data.total_results);
+    }
+
+    fetchSearchResults();
+  }
+
   return(
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
@@ -62,7 +73,8 @@ export default function Discover(){
           genres={genreOptions} 
           ratings={ratingOptions}  
           languages={languageOptions}
-          searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
+          // searchMovies={(keyword, year) => searchMovies(keyword, year)}
+          onSearch={onSearch}
         />
       </MovieFilters>
       <MovieResults>

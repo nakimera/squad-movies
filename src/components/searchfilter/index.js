@@ -17,6 +17,7 @@ export default function SearchFilters({ genres, ratings, languages, onSearch }) 
           type="text"
           icon={{ src: SearchIcon, alt: 'Magnifying glass' }} 
           placeholder="Search for movies"
+          onChange={onSearch}
         />
         <SearchBar
           id="year_search_input" 
