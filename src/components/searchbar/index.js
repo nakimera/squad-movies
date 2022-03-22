@@ -27,6 +27,7 @@ const InputWrapper = styled.div`
     font-size: 1.2em;
     margin-left: 10px;
     font-weight: 900;
+    z-index: 1;
 
     &::placeholder {
       opacity: .8;
