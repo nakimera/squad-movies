@@ -53,10 +53,12 @@ export default function Discover(){
 
   // TODO: Update search results based on the keyword and year inputs
 
-  const onSearch = (keyword) => {
-    // setKeyword(keyword);
+  const onSearch = (e) => {
+    const val = e.target.value;
+    const type = e.target.type;
+
     async function fetchSearchResults(){
-      let data = await searchMovies(keyword);
+      let data = await searchMovies({type, val});
       setResults(data); 
       setTotalCount(data.total_results);
     }
@@ -73,7 +75,6 @@ export default function Discover(){
           genres={genreOptions} 
           ratings={ratingOptions}  
           languages={languageOptions}
-          // searchMovies={(keyword, year) => searchMovies(keyword, year)}
           onSearch={onSearch}
         />
       </MovieFilters>

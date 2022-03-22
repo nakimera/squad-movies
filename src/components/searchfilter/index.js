@@ -24,6 +24,7 @@ export default function SearchFilters({ genres, ratings, languages, onSearch }) 
           type="number"
           icon={{ src: YearIcon, alt: 'Calendar icon' }} 
           placeholder="Year of release"
+          onChange={onSearch}
         />
       </SearchFiltersCont>
       <SearchFiltersCont>

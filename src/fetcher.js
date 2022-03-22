@@ -29,8 +29,9 @@ export function fetchGenres(){
     .catch(error => {return  errorHandler(error)});
 }
 
-export function searchMovies(keyword){
-    return axios.get(`/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${keyword}`)
+export function searchMovies({type, val}){
+    return axios.get(`${type === 'text' ? `/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${val}` : 
+        `/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&primary_release_year=2020`}`)
     .then(res => {
         return res.data;
     })
