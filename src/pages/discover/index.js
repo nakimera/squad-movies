@@ -58,6 +58,7 @@ export default function Discover(){
     const type = e.target.type;
 
     if(val !== ''){
+      if(type === 'number' && val.length < 4){}
       async function fetchSearchResults(){
         let data = await searchMovies({type, val});
           setResults(data); 
@@ -71,7 +72,7 @@ export default function Discover(){
   return(
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-      <TotalCount>{totalCount} movies</TotalCount>
+      <TotalCount>{totalCount > 0 ? `${totalCount} movies` : 'No results'}</TotalCount>
       <MovieFilters>
         <SearchFilters 
           genres={genreOptions} 
@@ -109,7 +110,7 @@ const MovieFilters = styled.div`
   margin-top: 15px;
 
   @media screen and (max-width: ${devices.mobile}){
-    display: none;
+    width: 100%;
   }
 `
 

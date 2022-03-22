@@ -40,6 +40,11 @@ const Container = styled.div`
   width: calc(100% - 120px);
   padding-left: 20px;
   position: relative;
+  padding-right: 0;
+
+  @media screen and (max-width: ${devices.mobile}){
+    width: calc(100% - 100px);
+  }
 `
 
 const Title = styled.h2`
@@ -49,7 +54,7 @@ const Title = styled.h2`
   font-weight: 800;
 
   @media screen and (max-width: ${devices.mobile}){
-    font-size: .9em;
+    font-size: 1em;
     width: 78%;
   }
 `;
@@ -87,6 +92,10 @@ const Genre = styled.p`
   padding: 0 5px;
   font-size: .9em;
   font-weight: 400;
+
+  @media screen and (max-width: ${devices.mobile}){
+    font-size: .8em;
+  }
 `
 
 const Overview = styled.p`
@@ -96,6 +105,7 @@ const Overview = styled.p`
 
   @media screen and (max-width: ${devices.mobile}){
     font-size: .8em;
+    margin-bottom: 30px;
   }
 `
 
