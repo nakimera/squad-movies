@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import styled from 'styled-components';
+import { useDebounce } from './debouncehook';
 
 import * as colors from "../../colors";
 import * as fetcher from "../../fetcher";
@@ -29,15 +30,22 @@ export default function Discover(){
     { id: 'RU', name: 'Russian' },
     { id: 'PO', name: 'Polish' }
   ]);
+  const [isSearching, setIsSearching] = useState(false);
+  const debouncedSearchTerm = useDebounce(keyword, 800);
+  const [type, setType] = useState('');
 
-  useEffect(() => {
+  const queryMovies = () => {
     async function fetchAllMovies(){
-      let data = await fetchMovies();
-      setResults(data); 
-      setTotalCount(data.total_results);
-    }
+    let data = await fetchMovies();
+    setResults(data); 
+    setTotalCount(data.total_results);
+  }
 
-    fetchAllMovies();
+  fetchAllMovies();
+  }
+  
+  useEffect(() => {
+    queryMovies();
   }, [])
 
   useEffect(() => {
@@ -49,36 +57,45 @@ export default function Discover(){
     fetchMovieGenres();
   }, [])
 
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setIsSearching(true);
+        
+        if(debouncedSearchTerm !== ''){
+          if(type === 'number' && debouncedSearchTerm.length < 4){};
+          async function fetchSearchResults(){
+            let data = await searchMovies(debouncedSearchTerm, type);
+              setIsSearching(false);
+              setResults(data); 
+              setTotalCount(data.total_results);
+          }
+          fetchSearchResults();
+        }
+      } else{
+        queryMovies();
+      }
+    },
+    [debouncedSearchTerm]
+  );
+
   // TODO: Preload and set the popular movies and movie genres when page loads
 
   // TODO: Update search results based on the keyword and year inputs
 
-  const onSearch = (e) => {
-    const val = e.target.value;
-    const type = e.target.type;
-
-    if(val !== ''){
-      if(type === 'number' && val.length < 4){}
-      async function fetchSearchResults(){
-        let data = await searchMovies({type, val});
-          setResults(data); 
-          setTotalCount(data.total_results);
-      }
-      
-      fetchSearchResults();
-    }
-  }
-
   return(
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-      <TotalCount>{totalCount > 0 ? `${totalCount} movies` : 'No results'}</TotalCount>
+      {!isSearching ? <TotalCount>{totalCount > 0 ? `${totalCount} movies` : 'No results'}</TotalCount> : 
+      <TotalCount>Loading ...</TotalCount>}
       <MovieFilters>
         <SearchFilters 
           genres={genreOptions} 
           ratings={ratingOptions}  
           languages={languageOptions}
-          onSearch={onSearch}
+          onSearch={e => {
+            setKeyword(e.target.value); 
+            setType(e.target.type)}}
         />
       </MovieFilters>
       <MovieResults>
