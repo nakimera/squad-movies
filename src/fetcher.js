@@ -31,7 +31,7 @@ export function fetchGenres(){
 
 export function searchMovies({type, val}){
     return axios.get(`${type === 'text' ? `/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${val}` : 
-        `/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&primary_release_year=2020`}`)
+        `/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&primary_release_year=${val}`}`)
     .then(res => {
         return res.data;
     })
