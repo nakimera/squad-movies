@@ -33,9 +33,12 @@ export default function Discover(){
   useEffect(() => {
     async function fetchAllMovies(){
       let data = await fetchMovies();
+      // let genres = await fetchGenres();
       setResults(data); 
       setTotalCount(data.total_results);
+      // setGenreOptions(genres);
     }
+
     fetchAllMovies();
   }, [])
 
@@ -46,7 +49,7 @@ export default function Discover(){
   return(
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-      <TotalCount>{totalCount} results</TotalCount>
+      <TotalCount>{totalCount} movies</TotalCount>
       <MovieFilters>
         <SearchFilters 
           genres={genreOptions} 
@@ -72,16 +75,25 @@ const DiscoverWrapper = styled.main`
 const MovieResults = styled.div`
   display: inline-block;
   width: calc(100% - 295px);
+
+  @media screen and (max-width: ${devices.mobile}){
+    width: 100%;
+  }
 `
 
 const MovieFilters = styled.div`
   width: 280px;
   float: right;
   margin-top: 15px;
+
+  @media screen and (max-width: ${devices.mobile}){
+    display: none;
+  }
 `
 
 const MobilePageTitle = styled.h1`
   display: none;
+  font-size: 1.4em;
 
   @media screen and (max-width: ${devices.mobile}){
     display: unset;
@@ -91,4 +103,10 @@ const MobilePageTitle = styled.h1`
 
 const TotalCount = styled.strong`
   display: block;
+
+  @media screen and (max-width: ${devices.mobile}){
+    font-weight: 300;
+    margin: 0;
+    margin-top: 20px;
+  }
 `
