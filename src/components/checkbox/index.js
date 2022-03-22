@@ -15,4 +15,15 @@ export default function Checkbox ({ id, name, checked, label, onChange }) {
 
 const CheckboxCont = styled.div`
   position: relative;
+  margin-bottom: 5px;
+  z-index: 1;
+
+  input{
+    cursor: pointer;
+  }
+
+  label{
+    margin-left: 8px;
+    font-weight: 300;
+  }
 `
