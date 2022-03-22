@@ -66,8 +66,9 @@ const Image = styled.img`
 `
 
 const GenresCon = styled.div`
-  p{
-    border-right: solid 1px  ${colors.primaryColor};
+  p{ 
+    margin: 0;
+    border-right: solid .8px  ${colors.primaryColor};
   }
 
   & p:last-child{
@@ -83,13 +84,15 @@ const Genre = styled.p`
   color: ${colors.primaryColor};
   text-transform: capitalize;
   display: inline-block;
-  margin: 0;
   padding: 0 5px;
-  font-size: .8em;
+  font-size: .9em;
+  font-weight: 400;
 `
 
 const Overview = styled.p`
-  margin-top: 8px;
+  margin-top: 12px;
+  color: ${colors.fontColor};
+  font-size: .95em;
 
   @media screen and (max-width: ${devices.mobile}){
     font-size: .8em;
