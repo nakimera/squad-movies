@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from 'styled-components';
 
 import * as colors from "../../colors";
+import * as devices from "../../devices";
 import ExpandableFilter from "../accordionfilter";
 import SearchBar from "../../components/searchbar";
 
@@ -27,7 +28,7 @@ export default function SearchFilters({ genres, ratings, languages, onSearch }) 
           onChange={onSearch}
         />
       </SearchFiltersCont>
-      <SearchFiltersCont>
+      <SearchFiltersCont id='accordions'>
         <CategoryTitle>Movie</CategoryTitle>
         {/* TODO: Complete the "AccordionFilter" component and re-use it for all filter categories */}
         <ExpandableFilter category='genre(s)' options={genres} />
@@ -51,10 +52,14 @@ const SearchFiltersCont = styled.div`
   .search_bar_wrapper:first-child {
     margin-bottom: 15px;
   }
-  
-  ${props => props.marginBottom && css`
-    margin-bottom: 15px;
-  `}
+
+  @media screen and (max-width: ${devices.mobile}){
+    background-color: inherit;
+    padding: 0;
+    &#accordions, .search_bar_wrapper:last-child{
+      display: none;
+    }
+  }
 `
 
 const CategoryTitle = styled.h3`

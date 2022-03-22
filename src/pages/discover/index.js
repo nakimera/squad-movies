@@ -86,6 +86,7 @@ export default function Discover(){
   return(
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
+      <FlexCon>
       {!isSearching ? <TotalCount>{totalCount > 0 ? `${totalCount} movies` : 'No results'}</TotalCount> : 
       <TotalCount>Loading ...</TotalCount>}
       <MovieFilters>
@@ -98,6 +99,7 @@ export default function Discover(){
             setType(e.target.type)}}
         />
       </MovieFilters>
+      </FlexCon>
       <MovieResults>
         <MovieList
           movies={results.results || []}
@@ -149,4 +151,11 @@ const TotalCount = styled.strong`
     margin: 0;
     margin-top: 20px;
   }
+`
+
+const FlexCon = styled.div`
+@media screen and (max-width: ${devices.mobile}){
+  display: flex;
+  flex-flow: column-reverse;
+}
 `
