@@ -5,10 +5,12 @@ import * as colors from "../../colors";
 import * as devices from "../../devices";
 
 export default function MovieItem ({ movie, genres }) {
+  const posterImageUrl = `${process.env.REACT_APP_BASE_POSTER_IMAGE_URL}/${movie.poster_path}`;
+
   return (
     // TODO: Complete the MovieItem component
     <MovieItemWrapper>
-      <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+      <Image src={posterImageUrl} />
       <Container>
         <Title>{movie.title}</Title>
         <Genre>Genre</Genre>

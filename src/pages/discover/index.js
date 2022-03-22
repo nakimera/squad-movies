@@ -7,7 +7,7 @@ import * as devices from "../../devices";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
-import { fetchMovies } from "../../fetcher";
+import { fetchMovies, fetchGenres } from "../../fetcher";
 
 export default function Discover(){
   const [results, setResults] = useState({});
@@ -33,13 +33,20 @@ export default function Discover(){
   useEffect(() => {
     async function fetchAllMovies(){
       let data = await fetchMovies();
-      // let genres = await fetchGenres();
       setResults(data); 
       setTotalCount(data.total_results);
-      // setGenreOptions(genres);
     }
 
     fetchAllMovies();
+  }, [])
+
+  useEffect(() => {
+    async function fetchMovieGenres(){
+      let genres = await fetchGenres();;
+      setGenreOptions(genres);
+    }
+
+    fetchMovieGenres();
   }, [])
 
   // TODO: Preload and set the popular movies and movie genres when page loads
