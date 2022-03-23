@@ -11,11 +11,9 @@ It is built with:
 
 It consumes the [theMovieDB](https://developers.themoviedb.org/3/) api
 
-### Project ScreenShot(s)
+### Demo
 
-![Screenshot 2022-03-22 at 21 39 45](https://user-images.githubusercontent.com/31965597/159552599-f9117fb0-8c80-4f47-962f-f32a0cb8a331.png)
-
-![Screenshot 2022-03-22 at 21 40 09](https://user-images.githubusercontent.com/31965597/159552669-5d4388de-f9fe-4c18-8663-d49218555430.png)
+![demo (2)](https://user-images.githubusercontent.com/31965597/159656732-0a136732-0a15-431d-ad42-c478d04f3d33.gif)
 
 
 ### Installation and Setup Instructions
