@@ -13,8 +13,12 @@ It consumes the [theMovieDB](https://developers.themoviedb.org/3/) api
 
 ### Demo
 
+##### Desktop
 ![demo (2)](https://user-images.githubusercontent.com/31965597/159656732-0a136732-0a15-431d-ad42-c478d04f3d33.gif)
 
+#### Mobile
+
+![mobile](https://user-images.githubusercontent.com/31965597/159658684-507aa96f-030f-4bbe-ac2b-7e12d9ac8e55.gif)
 
 ### Installation and Setup Instructions
 
